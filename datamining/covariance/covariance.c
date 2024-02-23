@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
-
+#include <time.h>
 /* Include polybench common header. */
 #include <polybench.h>
 
@@ -116,10 +116,23 @@ int main(int argc, char** argv)
   polybench_start_instruments;
 
   /* Run kernel. */
+clock_t start, end;
+    double duration;
+    start = clock();
   kernel_covariance (m, n, float_n,
 		     POLYBENCH_ARRAY(data),
 		     POLYBENCH_ARRAY(cov),
 		     POLYBENCH_ARRAY(mean));
+end = clock();
+    duration = ((double)(end - start)*1000) / CLOCKS_PER_SEC;
+
+    
+    FILE* outfile = fopen("../../output.txt", "a");
+
+    
+    fprintf(outfile, "datamining covariance runing time is :%fs\n", duration);
+
+    fclose(outfile);
 
   /* Stop and print timer. */
   polybench_stop_instruments;
