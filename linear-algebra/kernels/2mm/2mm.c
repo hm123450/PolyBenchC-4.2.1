@@ -150,7 +150,7 @@ clock_t start, end;
     FILE* outfile = fopen("../../../output.txt", "a");
 
     
-    fprintf(outfile, "linear 2mm runing time is :%fs\n", duration);
+    fprintf(outfile, "linear 2mm runing time is :%fms\n", duration);
 
     fclose(outfile);
 
