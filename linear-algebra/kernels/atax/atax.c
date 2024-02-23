@@ -20,7 +20,7 @@
 /* Include benchmark-specific header. */
 #include "atax.h"
 
-
+#include <time.h>
 /* Array initialization. */
 static
 void init_array (int m, int n,
@@ -105,12 +105,24 @@ int main(int argc, char** argv)
   polybench_start_instruments;
 
   /* Run kernel. */
+clock_t start, end;
+    double duration;
+    start = clock();
   kernel_atax (m, n,
 	       POLYBENCH_ARRAY(A),
 	       POLYBENCH_ARRAY(x),
 	       POLYBENCH_ARRAY(y),
 	       POLYBENCH_ARRAY(tmp));
+end = clock();
+    duration = ((double)(end - start)*1000) / CLOCKS_PER_SEC;
 
+    
+    FILE* outfile = fopen("../../../output.txt", "a");
+
+    
+    fprintf(outfile, "linear atax runing time is :%fs\n", duration);
+
+    fclose(outfile);
   /* Stop and print timer. */
   polybench_stop_instruments;
   polybench_print_instruments;
