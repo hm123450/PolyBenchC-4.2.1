@@ -8,7 +8,7 @@
  * Web address: http://polybench.sourceforge.net
  */
 /* bicg.c: this file is part of PolyBench/C */
-
+#include <time.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -119,12 +119,25 @@ int main(int argc, char** argv)
   polybench_start_instruments;
 
   /* Run kernel. */
+clock_t start, end;
+    double duration;
+    start = clock();
   kernel_bicg (m, n,
 	       POLYBENCH_ARRAY(A),
 	       POLYBENCH_ARRAY(s),
 	       POLYBENCH_ARRAY(q),
 	       POLYBENCH_ARRAY(p),
 	       POLYBENCH_ARRAY(r));
+end = clock();
+    duration = ((double)(end - start)*1000) / CLOCKS_PER_SEC;
+
+    
+    FILE* outfile = fopen("../../../output.txt", "a");
+
+    
+    fprintf(outfile, "linear bicg runing time is :%fs\n", duration);
+
+    fclose(outfile);
 
   /* Stop and print timer. */
   polybench_stop_instruments;
