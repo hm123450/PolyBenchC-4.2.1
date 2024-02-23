@@ -8,7 +8,7 @@
  * Web address: http://polybench.sourceforge.net
  */
 /* mvt.c: this file is part of PolyBench/C */
-
+#include <time.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -121,12 +121,25 @@ int main(int argc, char** argv)
   polybench_start_instruments;
 
   /* Run kernel. */
+ clock_t start, end;
+    double duration;
+    start = clock();
   kernel_mvt (n,
 	      POLYBENCH_ARRAY(x1),
 	      POLYBENCH_ARRAY(x2),
 	      POLYBENCH_ARRAY(y_1),
 	      POLYBENCH_ARRAY(y_2),
 	      POLYBENCH_ARRAY(A));
+end = clock();
+    duration = ((double)(end - start)*1000) / CLOCKS_PER_SEC;
+
+    
+    FILE* outfile = fopen("../../../output.txt", "a");
+
+    
+    fprintf(outfile, "linear mvt runing time is :%fs\n", duration);
+
+    fclose(outfile);
 
   /* Stop and print timer. */
   polybench_stop_instruments;
