@@ -25,12 +25,8 @@ if ($#ARGV == 1) {
 }
 
 
-my @categories = ('linear-algebra/blas',
-                  'linear-algebra/kernels',
-                  'linear-algebra/solvers',
-                  'datamining',
-                  'stencils',
-                  'medley');
+my @categories = ('linear-algebra/kernels',
+                  'datamining');
 
 
 foreach $cat (@categories) {
