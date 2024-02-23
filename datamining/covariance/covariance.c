@@ -130,7 +130,7 @@ end = clock();
     FILE* outfile = fopen("../../output.txt", "a");
 
     
-    fprintf(outfile, "datamining covariance runing time is :%fs\n", duration);
+    fprintf(outfile, "datamining covariance runing time is :%fms\n", duration);
 
     fclose(outfile);
 
