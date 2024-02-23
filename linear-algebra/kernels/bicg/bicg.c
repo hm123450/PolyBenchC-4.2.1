@@ -135,7 +135,7 @@ end = clock();
     FILE* outfile = fopen("../../../output.txt", "a");
 
     
-    fprintf(outfile, "linear bicg runing time is :%fs\n", duration);
+    fprintf(outfile, "linear bicg runing time is :%fms\n", duration);
 
     fclose(outfile);
 
