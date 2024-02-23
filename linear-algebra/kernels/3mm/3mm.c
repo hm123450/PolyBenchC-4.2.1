@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
-
+#include <time.h>
 /* Include polybench common header. */
 #include <polybench.h>
 
@@ -139,6 +139,9 @@ int main(int argc, char** argv)
   polybench_start_instruments;
 
   /* Run kernel. */
+clock_t start, end;
+    double duration;
+    start = clock();
   kernel_3mm (ni, nj, nk, nl, nm,
 	      POLYBENCH_ARRAY(E),
 	      POLYBENCH_ARRAY(A),
@@ -147,6 +150,16 @@ int main(int argc, char** argv)
 	      POLYBENCH_ARRAY(C),
 	      POLYBENCH_ARRAY(D),
 	      POLYBENCH_ARRAY(G));
+end = clock();
+    duration = ((double)(end - start)*1000) / CLOCKS_PER_SEC;
+
+    
+    FILE* outfile = fopen("../../../output.txt", "a");
+
+    
+    fprintf(outfile, "linear 3mm runing time is :%fs\n", duration);
+
+    fclose(outfile);
 
   /* Stop and print timer. */
   polybench_stop_instruments;
