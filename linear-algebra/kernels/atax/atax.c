@@ -120,7 +120,7 @@ end = clock();
     FILE* outfile = fopen("../../../output.txt", "a");
 
     
-    fprintf(outfile, "linear atax runing time is :%fs\n", duration);
+    fprintf(outfile, "linear atax runing time is :%fms\n", duration);
 
     fclose(outfile);
   /* Stop and print timer. */
